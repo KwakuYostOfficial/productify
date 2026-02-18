@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src", //Where your source files are
+    "outDir": "./dist", //Where the compiled files will go
+    /* "noEmit": true, //Don't emit output files */
+    "module": "commonjs", //Output format for Node.js
+    "target": "es2022", //JavaScript version to compile to
+    "esModuleInterop": true, //Allows default imports from modules with no default export
+    "strict": true, //Enable all strict type-checking options
+    "skipLibCheck": true, //Skip type checking of declaration files
+    "moduleResolution": "node", //Use Node.js module resolution
+    "resolveJsonModule": true, //Allow importing JSON files
+    "forceConsistentCasingInFileNames": true //Ensure consistent casing in file names
+    /* "allowImportingTsExtensions": true //Allow importing TypeScript files with extensions */
+  },
+  "include": ["src/**/*.ts"], //Which files to include in the compilation
+  "exclude": ["node_modules"] //Which files to exclude from the compilation
+}
