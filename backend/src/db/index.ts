@@ -5,7 +5,9 @@ import { ENV } from "../config/env";
 import { Client } from "@clerk/express";
 
 if (!ENV.DATABASE_URL) {
-  throw new Error("The DATABASE_URL is not set in the environment vairables");
+  throw new Error(
+    "The DATABASE_URL is not set in the environment variables. Please configure it.",
+  );
 }
 
 //This creates a new pool manager
