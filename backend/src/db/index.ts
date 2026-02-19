@@ -6,7 +6,7 @@ import { Client } from "@clerk/express";
 
 if (!ENV.DATABASE_URL) {
   throw new Error(
-    "The DATABASE_URL is not set in the environment vairables fix that",
+    "The DATABASE_URL is not set in the environment variables. Please configure it.",
   );
 }
 
