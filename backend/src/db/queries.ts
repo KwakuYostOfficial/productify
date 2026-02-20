@@ -24,6 +24,7 @@ export const updateUser = async (id: string, data: Partial<NewUser>) => {
     .set(data)
     .where(eq(users.id, id))
     .returning();
+  return user;
 };
 
 //upser ==> would either create or update
@@ -53,7 +54,9 @@ export const getProductById = async (id: string) => {
     where: eq(products.id, id),
     with: {
       user: true,
-      comments: true,
+      comments: {
+        orderBy: (comments, { desc }) => [desc(comments.createdAt)],
+      },
     },
     orderBy: (comments, { desc }) => [desc(comments.createdAt)],
   });
