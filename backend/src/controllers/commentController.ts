@@ -39,11 +39,16 @@ export async function deleteComment(req: Request, res: Response) {
     if (!userId) return res.status(400).json({ error: "Unauthorized" });
 
     const { commentId } = req.params as { commentId: string };
-    const existingComment = queries.getCommentById(commentId);
+    const existingComment = await queries.getCommentById(commentId);
 
     //This checks if the comment exist
     if (!existingComment)
-      res.status(400).json({ error: "The comment does not exist" });
+      return res.status(404).json({ error: "The comment does not exist" });
+
+    if (existingComment.userId !== userId)
+      return res
+        .status(403)
+        .json({ error: "Only the content owner can delete the comment" });
 
     await queries.deleteComment(commentId);
     res.status(200).json({ message: "Comment succesfully deleted" });

@@ -35,6 +35,7 @@ export async function getProductById(req: Request, res: Response) {
     const product = await queries.getProductById(id as string);
 
     if (!product) return res.status(404).json({ error: "Product not found" });
+    return res.status(200).json(product);
   } catch (error) {
     console.error("Error getting products", error);
     res.status(500).json({ error: "Failed to get product" });
@@ -50,7 +51,7 @@ export async function createProduct(req: Request, res: Response) {
     const { title, description, imageUrl } = req.body;
 
     if (!title || !description || !imageUrl) {
-      res
+      return res
         .status(400)
         .json({ error: "Title, description, and imageUrl are required" });
     }
@@ -117,12 +118,13 @@ export async function deleteProduct(req: Request, res: Response) {
       return;
     }
 
-    await queries.deleteProduct(id as string);
-    res.status(200).json({ message: "Product deleted succesful" });
     if (existingProduct.userId !== userId) {
       res.status(401).json({ error: "You can only delete your own product" });
       return;
     }
+
+    await queries.deleteProduct(id as string);
+    res.status(200).json({ message: "Product deleted succesful" });
   } catch (error) {
     console.error("Error deleting the product : ", error);
     res.status(500).json({ error: "Failed to delete product" });
