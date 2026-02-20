@@ -71,6 +71,11 @@ export const getProductsById = async (userId: string) => {
 };
 
 export const updateProduct = async (id: string, data: Partial<NewProduct>) => {
+  const existProduct = await getProductById(id);
+  if (!existProduct) {
+    throw new Error(`Prducts with id ${id} does not exist`);
+  }
+
   const [product] = await db
     .update(products)
     .set(data)
@@ -81,6 +86,11 @@ export const updateProduct = async (id: string, data: Partial<NewProduct>) => {
 };
 
 export const deleteProduct = async (id: string) => {
+  const existProduct = await getProductById(id);
+  if (!existProduct) {
+    throw new Error(`Product with id ${id} does not exist`);
+  }
+
   const [product] = await db
     .delete(products)
     .where(eq(products.id, id))
@@ -96,6 +106,11 @@ export const createComment = async (data: NewComment) => {
 };
 
 export const deleteComment = async (id: string) => {
+  const existComment = await getCommentById(id);
+  if (!existComment) {
+    throw new Error(`Comment with id ${id} does not exist`);
+  }
+
   const [comment] = await db
     .delete(comments)
     .where(eq(comments.id, id))
