@@ -82,7 +82,7 @@ export async function updateProduct(req: Request, res: Response) {
     //Check if product exist and belongs to user
     const existingProduct = await queries.getProductById(id as string);
     if (!existingProduct) {
-      res.status(401).json({ error: "Product not found" });
+      res.status(404).json({ error: "Product not found" });
       return;
     }
 
@@ -114,7 +114,7 @@ export async function deleteProduct(req: Request, res: Response) {
     //Checks if product exists and belongs to user
     const existingProduct = await queries.getProductById(id as string);
     if (!existingProduct) {
-      res.status(401).json({ error: "Product not found" });
+      res.status(404).json({ error: "Product not found" });
       return;
     }
 
