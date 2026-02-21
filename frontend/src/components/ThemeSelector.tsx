@@ -5,7 +5,7 @@ const THEMES = [
   "light",
   "dark",
   "cupcake",
-  "bulbebee",
+  "bumblebee",
   "emerald",
   "corporate",
   "synthwave",
@@ -22,7 +22,7 @@ const THEMES = [
   "wireframe",
   "black",
   "luxury",
-  "aracula",
+  "dracula",
   "cmyk",
   "autumn",
   "business",
@@ -66,7 +66,7 @@ const ThemeSelector = () => {
               className={`flex justify-between ${theme === t ? "bg-primary text-primary-content" : ""}`}
             >
               <span className="capitalize">{t}</span>
-              <div className="flex gap-0 5" data-theme={t}>
+              <div className="flex gap-0.5" data-theme={t}>
                 <span className="w-2 h-4 rounded-sm bg-primary" />
                 <span className="w-2 h-4 rounded-sm bg-secondary" />
                 <span className="w-2 h-4 rounded-sm bg-accent" />

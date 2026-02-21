@@ -11,13 +11,13 @@ const App = () => {
   return (
     <div className="min-h-screen bg-base-100">
       <Navbar />
-      <main className="max-w-5wl mx-auto px-4 py-8">
+      <main className="max-w-5xl mx-auto px-4 py-8">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/create" element={<CreatePage />} />
-          <Route path="/edit" element={<EditProductPage />} />
+          <Route path="/product/:id/edit" element={<EditProductPage />} />
         </Routes>
       </main>
     </div>
