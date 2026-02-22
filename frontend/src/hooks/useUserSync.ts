@@ -19,13 +19,20 @@ const useUserSync = () => {
 
   useEffect(() => {
     if (isSignedIn && user && !isPending && !isSuccess) {
+      const email = user.primaryEmailAddress?.emailAddress;
+      const name = user.fullName || user.firstName;
+
+      if (!email || !name) {
+        console.warn("User sync skipped: missing email or name");
+        return;
+      }
       syncUserMutation({
-        email: user.primaryEmailAddress?.emailAddress!,
-        name: user.fullName || user.firstName!,
+        email,
+        name,
         imageUrl: user.imageUrl,
       });
     }
-  }, [isSignedIn, user, isPending, isSignedIn]);
+  }, [isSignedIn, user, isPending, isSuccess, syncUserMutation]);
 
   return { isSynced: isSuccess };
 };

@@ -27,7 +27,7 @@ export async function getProductById(id: string) {
 
 //Get a users product
 export async function getMyProducts() {
-  const { data } = await api.get(`products/my`);
+  const { data } = await api.get(`/products/my`);
   return data;
 }
 
@@ -44,7 +44,7 @@ export async function updateProduct({
   ...productData
 }: {
   id: string;
-  productData: string;
+  [key: string]: unknown;
 }) {
   const { data } = await api.put(`/products/${id}`, productData);
   return data;
