@@ -10,16 +10,11 @@ import commentRoutes from "./routes/commentRoutes";
 
 const app = express();
 
-const corsOption = {
-  origin: ENV.FRONTEND_URL,
-  credentials: true, // credentials: true allows the frontend to send cookies to the backend so that we can authenticate the users
-};
-
 /* || MIDDLEWEARE SECTIONS */
+app.use(cors({ origin: ENV.FRONTEND_URL, credentials: true })); //This allows other domains access resources from this endpoint without being blocked by CORS policy. We need this to allow our frontend to access the backend API. The credentials: true option allows cookies to be sent in cross-origin requests, which is necessary for authentication with Clerk. Make sure to replace ENV.FRONTEND_URL with the actual URL of your frontend application in production.
 app.use(clerkMiddleware()); // auth object will be available in req.auth
 app.use(express.json()); // This parses JSON reques bodies.
 app.use(express.urlencoded({ extended: true })); // This parses form data like HTML fors.
-app.use(cors(corsOption)); //This allows other domains access resources from this endpoint without being blocked
 
 app.get("/", (req, res) => {
   res.json({
