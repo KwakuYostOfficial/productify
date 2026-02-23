@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
@@ -11,7 +11,6 @@ import useUserSync from "./hooks/useUserSync";
 
 const App = () => {
   const { isClerkLoader, isSignedIn } = useAuthReq();
-  console.log("isSignedIn:", isSignedIn);
 
   useUserSync();
 
@@ -24,9 +23,18 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/create" element={<CreatePage />} />
-          <Route path="/product/:id/edit" element={<EditProductPage />} />
+          <Route
+            path="/profile"
+            element={isSignedIn ? <ProfilePage /> : <Navigate to={"/"} />}
+          />
+          <Route
+            path="/create"
+            element={isSignedIn ? <CreatePage /> : <Navigate to={"/"} />}
+          />
+          <Route
+            path="/product/:id/edit"
+            element={isSignedIn ? <EditProductPage /> : <Navigate to={"/"} />}
+          />
         </Routes>
       </main>
     </div>
