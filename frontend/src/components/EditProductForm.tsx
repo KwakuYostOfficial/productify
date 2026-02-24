@@ -5,7 +5,7 @@ import {
   FileTextIcon,
   SaveIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 function EditProductForm({
@@ -24,6 +24,14 @@ function EditProductForm({
     description: product.description,
     imageUrl: product.imageUrl,
   });
+
+  useEffect(() => {
+    setFormData({
+      title: product.title ?? "",
+      description: product.description ?? "",
+      imageUrl: product.imageUrl ?? "",
+    });
+  }, [product]);
 
   return (
     <div className="max-w-lg mx-auto">
