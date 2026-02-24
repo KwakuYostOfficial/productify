@@ -8,25 +8,26 @@ function EditProductPage() {
   const { id } = useParams();
   const { userId } = useAuth();
   const navigate = useNavigate();
-
   const updateProduct = useUpdateProduct();
-  const { data: product, isLoading } = usedProduct(id!);
+  const { data: product, isLoading } = usedProduct(id);
 
   if (isLoading) return <LoadingSpinner />;
 
-  if (!product || product.userId !== userId) {
+  if (!product && !updateProduct.isPending) {
     return (
       <div className="card bg-base-300 max-w-md mx-auto">
         <div className="card-body items-center text-center">
-          <h2 className="card-title text-error">
-            {!product ? "Not found" : "Access denied"}
-          </h2>
+          <h2 className="card-title text-error">Product not found</h2>
           <Link to="/" className="btn btn-primary btn-sm">
             Go Home
           </Link>
         </div>
       </div>
     );
+  }
+
+  if (product && product.userId !== userId) {
+    return <div className="text-center py-20">Access Denied</div>;
   }
 
   return (
