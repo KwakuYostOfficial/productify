@@ -28,7 +28,7 @@ export async function getAllProducts() {
 }
 
 //Get a single product by Id
-export async function getProductById(id: string) {
+export async function getProductById(id: string | undefined) {
   try {
     const { data } = await api.get(`/products/${id}`);
     return data;
@@ -76,7 +76,7 @@ export async function updateProduct({
 }
 
 //Delete Product
-export async function deleteProduct(id: string) {
+export async function deleteProduct(id: string | undefined) {
   try {
     const { data } = await api.delete(`/products/${id}`);
     return data;

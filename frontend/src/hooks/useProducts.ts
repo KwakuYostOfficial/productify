@@ -8,20 +8,22 @@ import {
   updateProduct,
 } from "../lib/api";
 
-export const useProducts = () =>
-  useQuery({ queryKey: ["products"], queryFn: getAllProducts });
+export const useProducts = () => {
+  return useQuery({ queryKey: ["products"], queryFn: getAllProducts });
+};
 
-export const useCreateProduct = () =>
-  useMutation({ mutationFn: createProduct });
+export const useCreateProduct = () => {
+  return useMutation({ mutationFn: createProduct });
+};
 
-export const usedProduct = (id: string) =>
-  useQuery({
+export const usedProduct = (id: string | undefined) => {
+  return useQuery({
     queryKey: ["product", id],
     queryFn: () => getProductById(id),
     enabled: !!id,
     //double bang opperator
   });
-
+};
 export const useDeleteProduct = () => {
   const queryClient = useQueryClient();
   return useMutation({
